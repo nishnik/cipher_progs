@@ -16,16 +16,16 @@ int main()
 		cout<<"\n 3. Vigenere Cipher";
 		cout<<"\n 4. Hill Cipher";
 		cout<<"\n 5. Transposition Cipher";
-		//cout<<"\n 6. Playfair Cipher";
-		cout<<"\n 6. Quit";
+		cout<<"\n 6. Playfair Cipher";
+		cout<<"\n 7. Quit";
 		cout<<"\nEnter Choice: ";
 		int a=0;
 		cin>>a;
 		switch(a){
-			case 6:
+			case 7:
 			return 0;break;
-			//case 6:
-			//C.playfair_cipher();break;
+			case 6:
+			C.playfair_cipher();break;
 			case 5:
 			C.transposition_cipher();break;
 			case 4:

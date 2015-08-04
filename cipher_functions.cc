@@ -456,14 +456,14 @@ void cipher::hill_cipher()
 			}
 			
 		}
-		cout<<"\n Encrypted text is: "<<res_msg;
+		cout<<"\n Decrypted text is: "<<res_msg;
 		
 	}
 }
 
-/*
 
-void cipher::playfair_cipher()//work on repetiotion of chars in msg
+
+void cipher::playfair_cipher()
 {
 	cout<<"\n Playfair Cipher";
 	cout<<"\n 1. Encrypt";
@@ -505,71 +505,155 @@ void cipher::playfair_cipher()//work on repetiotion of chars in msg
 				k2++;
 			}
 		}
+		
 	}
 	if(crypt_choice==1)
 	{
 		string res_msg;
-		int res_msg_p=0;
-		if(msg.length()%2!=0)
-			msg=msg+'x';
+		res_msg.resize(msg.length());
 		for(int i=0;i<msg.length();i+=2)
 		{
-			if(arr[i]!=arr[i+1])
+			if(i+1==msg.length())
 			{
-				pair<int,int> c1,c2;
-				int flag=0;
-				for(int a=0;a<5 && flag!=2;a++)
-				{
-					for(int b=0;b<5 && flag!=2;b++)
-					{
-						if(arr[i]==master_array[a][b])
-						{
-							c1.first=a;
-							c1.second=b;
-							flag++;
-						}
-						else if(arr[i+1]==master_array[a][b])
-						{
-							c1.first=a;
-							c1.second=b;
-							flag++;
-						}
 
+				msg.insert(i,"x");
+				res_msg.resize(msg.length());
+				
+			}
+			if(msg[i]==msg[i+1])
+			{
+				if(msg[i]=='x')
+					msg.insert(i+1,"q");
+				else
+					msg.insert(i+1,"x");
+				res_msg.resize(msg.length());
+				cout<<msg<<"\n";
+				i-=2;
+				continue;
+			}
+			
+			pair<int,int> c1,c2;
+			int flag=0;
+			for(int a=0;a<5 && flag!=2;a++)
+			{
+				for(int b=0;b<5 && flag!=2;b++)
+				{
+					if(msg[i]==master_array[a][b])
+					{
+						c1.first=a;
+						c1.second=b;
+						flag++;
 					}
-				}
-				if(c1.first==c2.first)
-				{
-					if(c1.second==4)
-						c1.second=0;
-					else
-						c1.second++;
-					if(c2.second==4)
-						c2.second=0;
-					else
-						c2.second++;
-					res_msg[i]=master_array[c1.first][c1.second];
-					res_msg[i+1]=master_array[c2.first][c2.second];
-				}
-				else if(c1.second==c2.second)
-				{
-					if(c1.first==4)
-						c1.first=0;
-					else
-						c1.first++;
-					if(c2.first==4)
-						c2.first=0;
-					else
-						c2.first++;
-					res_msg[i]=master_array[c1.first][c1.second];
-					res_msg[i+1]=master_array[c2.first][c2.second];
+					else if(msg[i+1]==master_array[a][b])
+					{
+						c2.first=a;
+						c2.second=b;
+						flag++;
+					}
+
 				}
 			}
+			if(c1.first==c2.first)
+			{
+				if(c1.second==4)
+					c1.second=0;
+				else
+					c1.second++;
+				if(c2.second==4)
+					c2.second=0;
+				else
+					c2.second++;
+				res_msg[i]=master_array[c1.first][c1.second];
+				res_msg[i+1]=master_array[c2.first][c2.second];
+			}
+			else if(c1.second==c2.second)
+			{
+				if(c1.first==4)
+					c1.first=0;
+				else
+					c1.first++;
+				if(c2.first==4)
+					c2.first=0;
+				else
+					c2.first++;
+				res_msg[i]=master_array[c1.first][c1.second];
+				res_msg[i+1]=master_array[c2.first][c2.second];
+			}
+			else
+			{
+				res_msg[i]=master_array[c1.first][c2.second];
+				res_msg[i+1]=master_array[c2.first][c1.second];
+			}
+
+
 		}
+		cout<<"\n Encrypted text is: "<<res_msg;
+	}
+	if(crypt_choice==2)
+	{
+		string res_msg;
+		res_msg.resize(msg.length());
+		for(int i=0;i<msg.length();i+=2)
+		{
+			pair<int,int> c1,c2;
+			int flag=0;
+			for(int a=0;a<5 && flag!=2;a++)
+			{
+				for(int b=0;b<5 && flag!=2;b++)
+				{
+					if(msg[i]==master_array[a][b])
+					{
+						c1.first=a;
+						c1.second=b;
+						flag++;
+					}
+					else if(msg[i+1]==master_array[a][b])
+					{
+						c2.first=a;
+						c2.second=b;
+						flag++;
+					}
+
+				}
+			}
+			if(c1.first==c2.first)
+			{
+				if(c1.second==0)
+					c1.second=4;
+				else
+					c1.second--;
+				if(c2.second==0)
+					c2.second=4;
+				else
+					c2.second--;
+				res_msg[i]=master_array[c1.first][c1.second];
+				res_msg[i+1]=master_array[c2.first][c2.second];
+			}
+			else if(c1.second==c2.second)
+			{
+				if(c1.first==0)
+					c1.first=4;
+				else
+					c1.first--;
+				if(c2.first==0)
+					c2.first=4;
+				else
+					c2.first--;
+				res_msg[i]=master_array[c1.first][c1.second];
+				res_msg[i+1]=master_array[c2.first][c2.second];
+			}
+			else
+			{
+				res_msg[i]=master_array[c1.first][c2.second];
+				res_msg[i+1]=master_array[c2.first][c1.second];
+			}
+		}
+		cout<<"\n Decrypted text is: "<<res_msg;
 	}
 }
 
 
-*/
+
 
 void cipher::transposition_cipher()
 {

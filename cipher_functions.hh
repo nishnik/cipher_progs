@@ -7,6 +7,6 @@ class cipher{
 		void vigenere_cipher();
 		void affine_cipher();
 		void hill_cipher();
-		//void playfair_cipher();
+		void playfair_cipher();
 		void transposition_cipher();
 };
