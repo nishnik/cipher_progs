@@ -1,5 +1,5 @@
-//TODO: PLAYFAIR CIPHER DECRYPTION
-//TODO: ADD INFO
+//TODO: ADD INFO/DOCUMENTATION
+//TODO: ADD DES
 #include <iostream>
 #include "cipher_functions.hh"
 
