@@ -15,7 +15,7 @@ long long mod (long long a,long long b)
 		return (-1*(a/b)+1)*b+a; 
 	}
 }
-long long inv_mod_supp(long long a,long long b,long long x0=0,long long x1=1)
+long long inv_mod_supp(long long a,long long b,long long x0=0,long long x1=1)//extended euclidean
 {
 	if(a>b && b!=0)
 	{
@@ -38,7 +38,7 @@ long long inv_mod(long long a,long long b)//b is the modulo number, a is the ope
 	}
 	else
 	{
-		t=(1-(b*t))/a;
+		t=(1-(b*t))/a;// it may be w.r.t b
 		return t;
 	}
 }
@@ -50,7 +50,7 @@ long long det(vector<vector<float> > mat, int order)
 		{
 			for(int j=0;j<order;j++)
 			{
-				if(j>i)
+				if(j>i)//elementary row operations
 				{
 					ratio=mat[j][i]/mat[i][i];
 					for(int k=0;k<order;k++)
@@ -91,7 +91,7 @@ vector<vector<float> > inv_mod_matrix(vector<vector<float> > mat, int order)
 		}
 	}
 
-	for(int i=order-1;i>0;i--)
+	for(int i=order-1;i>0;i--)//ordering of rows
 	{
 		if(mat[i-1][0]<mat[i][0])
 		{
@@ -106,7 +106,7 @@ vector<vector<float> > inv_mod_matrix(vector<vector<float> > mat, int order)
 			}		
 		}
 	}
-	for(int i=0;i<order;i++)
+	for(int i=0;i<order;i++)//row operations
 	{
 		for(int j=0;j<order;j++)
 		{
@@ -123,7 +123,7 @@ vector<vector<float> > inv_mod_matrix(vector<vector<float> > mat, int order)
 	}
 	long long de = det(mat,order);
 	long long inv_de = inv_mod(de,26);
-	for(int i=0;i<order;i++)
+	for(int i=0;i<order;i++)//doing the modulus work
 	{
 		float d=mat[i][i];
 		for(int j=0;j<order;j++)
